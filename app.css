@@ -601,6 +601,9 @@
     width: 280px;
     line-height: 1.5;
   }
+  .notification-message{
+    padding: 10px;
+  }
 }
 
 @media (max-width: 325px){
