@@ -587,6 +587,9 @@
   .step-flex {
    gap: 0px;
   }
+  .step-flex p{
+    line-height: 1.6;
+  }
   .img1{
     display: none;
   }
