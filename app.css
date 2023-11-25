@@ -133,7 +133,7 @@
     display: flex;
     align-items: center;
     color: #fff;
-    gap: 8px;
+    justify-content: space-between;
     font-weight: bold;
     cursor: pointer;
   }
