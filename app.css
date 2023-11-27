@@ -544,9 +544,6 @@
     margin-left: 10px;
     background: none;
   }
-  .notification:focus{
-    border: none;
-   }
   .notification-menu{
     width: 358px;
     height: 136px;
@@ -561,9 +558,6 @@
     border-radius: 8px;
     padding-left: 2px;
     padding-right: 0px;
-  }
-  .davii:focus{
-    border: none;
   }
   .user-name{
     display: none;
