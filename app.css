@@ -544,6 +544,9 @@
     margin-left: 10px;
     background: none;
   }
+  .notification:focus{
+    border: none;
+  }
   .notification-menu{
     width: 358px;
     height: 136px;
