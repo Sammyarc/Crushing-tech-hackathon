@@ -17,6 +17,7 @@ function toggleDropdown() {
 }
 
 // STEPS DROPDOWN
+
 function toggleStep(stepId) {
     var stepContent = document.getElementById(stepId);
     var allSteps = document.getElementsByClassName("step");
