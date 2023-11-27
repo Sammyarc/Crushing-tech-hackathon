@@ -41,7 +41,28 @@ function toggleStep(stepId) {
     stepContent
         .classList
         .add("active");
+}
 
+// Function to handle checkbox change
+function handleCheckboxChange(checkbox) {
+    // Update progress and open the next step if the checkbox is checked
+    updateProgress();
+    if (checkbox.checked) {
+        var currentStep = checkbox.closest('.step');
+        var nextStep = currentStep.nextElementSibling;
+
+        if (nextStep) {
+            toggleStep(nextStep.id);
+        }
+    }
+}
+
+// Attach the handleCheckboxChange function to all checkboxes
+var checkboxes = document.getElementsByClassName("step-checkbox");
+for (var i = 0; i < checkboxes.length; i++) {
+    checkboxes[i].addEventListener('change', function () {
+        handleCheckboxChange(this);
+    });
 }
 
 // Open the first step by default
@@ -72,6 +93,7 @@ function updateProgress() {
     var progressText = document.getElementById('progressText');
     progressText.innerText = `${completedSteps} / ${totalSteps} completed`;
 }
+
 
 // PLAN REMOVAL AND DEFAULT LOADING
 
@@ -106,8 +128,72 @@ function showDiv() {
 function toggleNotificationDropdown() {
     var notificationDropdown = document.getElementById("notificationDropdown");
     var userDropdown = document.getElementById("userDropdown");
+    var notificationMenu = document.getElementById("notification-menu");
     notificationDropdown.classList.toggle("active");
 
+
+     // FOCUS ON THE FIRST ITEM
+     const allNotificationMenuItems = notificationDropdown.querySelectorAll('[role="notification-item"]');
+
+     // Is it expanded?
+     const isExpanded = notificationMenu.getAttribute("aria-expanded") === "true";
+     
+     
+     if (isExpanded) {
+        notificationMenu.setAttribute("aria-expanded", "false");
+        notificationMenu.focus();
+     } else {
+        notificationMenu.setAttribute("aria-expanded", "true");
+         allNotificationMenuItems.item(0).focus();
+ 
+         notificationDropdown.addEventListener("keyup", handleNotificationMenuEscapeKeyPress);
+     }
+
+      // CLOSE WHEN ESCAPE KEY IS PRESSED
+    function handleNotificationMenuEscapeKeyPress(event) {
+
+        if(event.key === 'Escape') {
+            notificationDropdown.classList.remove("active");
+        }
+       
+    }
+
+     // ARROW NAVIGATION
+     function handleNotificationMenuItemArrowKeyPress(event, notificationMenuItemIndex) {
+        
+        const isLastNotificationMenuItem = notificationMenuItemIndex === allNotificationMenuItems.length - 1;
+        const isFirstNotificationMenuItem = notificationMenuItemIndex === 0;
+        const nextNotificationMenuItem = allNotificationMenuItems.item(notificationMenuItemIndex + 1);
+        const previousNotificationMenuItem = allNotificationMenuItems.item(notificationMenuItemIndex - 1);
+
+        if(event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            if(isLastNotificationMenuItem) {
+                allNotificationMenuItems.item(0).focus();
+
+                return;
+            }
+
+            nextNotificationMenuItem.focus();
+        }
+         
+        if(event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            if(isFirstNotificationMenuItem) {
+                allNotificationMenuItems.item( allNotificationMenuItems.length - 1).focus();
+
+                return;
+            }
+
+            previousNotificationMenuItem.focus();
+        }
+
+
+    }   
+
+    allNotificationMenuItems.forEach(function (notificationMenuItem, notificationMenuItemIndex) {
+        notificationMenuItem.addEventListener("keyup", function (event) {
+            handleNotificationMenuItemArrowKeyPress(event, notificationMenuItemIndex);
+        });
+    });
 
     // Close userDropdown if it's open
     if (userDropdown.classList.contains('active')) {
@@ -130,18 +216,85 @@ window.onclick = function(event) {
 
 
 // USER DETAILS DROPDOWN
-
 function toggleUserDropdown() {
     var userDropdown = document.getElementById("userDropdown");
     var notificationDropdown = document.getElementById("notificationDropdown");
+    var profileMenu = document.getElementById("profile-menu");
     userDropdown.classList.toggle("active");
+    
+    // FOCUS ON THE FIRST ITEM
+    const allMenuItems = userDropdown.querySelectorAll('[role="menu-item"]');
 
+    // Is it expanded?
+    const isExpanded = profileMenu.getAttribute("aria-expanded") === "true";
+    
+    
+    if (isExpanded) {
+        profileMenu.setAttribute("aria-expanded", "false");
+        profileMenu.focus();
+    } else {
+        profileMenu.setAttribute("aria-expanded", "true");
+        allMenuItems.item(0).focus();
+
+        userDropdown.addEventListener("keyup", handleMenuEscapeKeyPress);
+    }
 
     // Close notificationDropdown if it's open
     if (notificationDropdown.classList.contains('active')) {
         notificationDropdown.classList.remove('active');
     }
+
+    // CLOSE WHEN ESCAPE KEY IS PRESSED
+    function handleMenuEscapeKeyPress(event) {
+
+        if(event.key === 'Escape') {
+           userDropdown.classList.remove("active");
+        }
+       
+    }
+
+    // ARROW NAVIGATION
+    function handleMenuItemArrowKeyPress(event, menuItemIndex) {
+        
+        const isLastMenuItem = menuItemIndex === allMenuItems.length - 1;
+        const isFirstMenuItem = menuItemIndex === 0;
+        const nextMenuItem = allMenuItems.item(menuItemIndex + 1);
+        const previousMenuItem = allMenuItems.item(menuItemIndex - 1);
+
+        if(event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            if(isLastMenuItem) {
+                allMenuItems.item(0).focus();
+
+                return;
+            }
+
+            nextMenuItem.focus();
+        }
+         
+        if(event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            if(isFirstMenuItem) {
+                allMenuItems.item(allMenuItems.length - 1).focus();
+
+                return;
+            }
+
+            previousMenuItem.focus();
+        }
+
+
+    }   
+
+    allMenuItems.forEach(function (menuItem, menuItemIndex) {
+        menuItem.addEventListener("keyup", function (event) {
+            handleMenuItemArrowKeyPress(event, menuItemIndex);
+        });
+    });
 }
+
+
+
+
+
 
 // Close the dropdown when clicking outside of it
 window.onclick = function(event) {
@@ -155,3 +308,14 @@ window.onclick = function(event) {
         }
     }
 }
+
+
+// links 
+
+function handleLinkKeydown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        // Perform the link action here
+        window.location.href = event.target.href;
+    }
+}
+
