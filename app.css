@@ -559,6 +559,9 @@
     padding-left: 2px;
     padding-right: 0px;
   }
+  .davii:focus{
+    border: none;
+  }
   .user-name{
     display: none;
   }
