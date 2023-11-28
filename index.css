@@ -265,7 +265,7 @@ body {
   background-color: #36fba1;
   display: grid;
   place-items: center;
-  color: rgba(0, 0, 0, 0.4);
+  color: #404040;
   font-size: 12px;
   font-weight: 500;
   line-height: 130%;
@@ -386,9 +386,10 @@ body {
   color: var(--font-mid-2);
 }
 
-/* CALLOUT COMPONENTS */
 
-.callout {
+/* PRICING COMPONENTS */
+
+.pricing {
   padding: 0.75rem 0.5rem 0.75rem 1rem;
   margin: 0 auto 1rem;
   background-color: var(--color-gray-300);
@@ -403,26 +404,30 @@ body {
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 }
 
-.callout .flex-wrapper {
+.pricing .flex-wrapper {
   flex-grow: 1;
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 1rem;
 }
 
-.callout .close-btn {
+.pricing .close-btn {
   padding: 6px;
   border-radius: 6px;
   flex-shrink: 0;
 }
 
-.callout .close-btn:hover {
+.pricing .close-btn:hover {
   background-color: var(--color-gray-200);
 }
 
-/* ONBOARDING COMPONENTS */
+.pricing .close-btn:focus{
+  outline: 2px var(--states-focused) solid;
+}
 
-.onboarding {
+/* STEPS COMPONENTS */
+
+.steps {
   max-width: 50rem;
   margin: 1rem auto 0;
   background-color: #fff;
@@ -435,19 +440,19 @@ body {
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 }
 
-.onboarding > header {
+.steps > header {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
 }
 
-.onboarding > header h2 {
+.steps > header h2 {
   font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-.onboarding > header p {
+.steps> header p {
   margin-bottom: 1rem;
   font-size: 13px;
 }
@@ -458,18 +463,18 @@ body {
 }
 
 #toggle-setup-btn .icon {
-  transition: transform 500ms ease-in;
+  transition: transform 0.3s ease-in;
 }
 
 #toggle-setup-btn[data-is-open="true"] .icon {
   transform: rotate(180deg);
 }
 
-.onboarding > header .icon {
+.steps > header .icon {
   fill: #4a4a4a;
 }
 
-.onboarding-progress {
+.step-progress {
   font-size: 12px;
   line-height: 130%;
   display: flex;
@@ -477,7 +482,7 @@ body {
   gap: 0.5rem;
 }
 
-.onboarding-progress-meter {
+.step-progress-meter {
   display: inline-block;
   width: 4.5rem;
   height: 4px;
@@ -486,7 +491,7 @@ body {
   border-radius: 2px;
 }
 
-.onboarding-progress-meter .bar {
+.step-progress-meter .bar {
   display: inline-block;
   width: 0%;
   height: 100%;
@@ -577,6 +582,10 @@ body {
   transform: scale(1) rotate(0deg);
 }
 
+.setup-step-toggle:focus{
+  outline: 2px var(--states-focused) solid;
+  outline-offset: 2px;
+}
 .setup h3 {
   font-weight: 500;
 }
@@ -611,7 +620,10 @@ body {
   font-size: 0.875rem;
   font-weight: 500;
 }
-
+.content a:focus{
+  outline: 2px var(--states-focused) solid;
+  outline-offset: 2px;
+}
 .setup img {
   position: absolute;
   top: 0.5rem;
@@ -764,8 +776,8 @@ body {
   .top-bar > div {
     gap: 0.5rem;
   }
-  .callout,
-  .onboarding {
+  .pricing,
+  .steps {
     border-radius: 0;
   }
 
@@ -794,12 +806,12 @@ body {
     display: none;
   }
 
-  .callout {
+  .pricing {
     align-items: start;
     gap: 0;
   }
 
-  .callout .close-btn {
+  .pricing .close-btn {
     padding: 0.5rem;
   }
 }
